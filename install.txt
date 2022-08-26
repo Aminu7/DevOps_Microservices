@@ -1,0 +1,53 @@
+#updatee apt-get
+sudo apt-get update
+
+#update python3
+sudo apt-get upgrade python3
+
+#install python3-venv
+sudo apt-get install python3-venv
+
+python3 -m venv ~/.devops
+source ~/.devops/bin/activate
+
+sudo apt install make
+make install
+
+#install docker on ubuntu 18.04
+sudo apt update
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+sudo apt update
+apt-cache policy docker-ce
+sudo apt install docker-ce
+sudo systemctl status docker
+
+#Grant user permission to docker executable
+sudo usermod -aG docker ${USER}
+su - ${USER}
+sudo usermod -aG docker ubuntu
+sudo su
+sudo passwd ubuntu
+
+#install hadolint
+wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
+chmod +x /bin/hadolint
+
+make lint
+
+#install minikube
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+#install kubernetes
+curl -L -s https://dl.k8s.io/release/stable.txt
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+kubectl version --client
+kubectl version --client --output=yaml
+
+sudo usermod -aG docker ${USER}
+su - ${USER}
+minikube start
+minikube status
