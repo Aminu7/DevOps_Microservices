@@ -31,14 +31,18 @@ sudo su
 sudo passwd ubuntu
 
 #install hadolint
-wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
-chmod +x /bin/hadolint
+sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
+sudo chmod +x /bin/hadolint
 
+make lint
+source ~/.devops/bin/activate
 make lint
 
 #install minikube
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
+minikube version
+
 
 #install kubernetes
 curl -L -s https://dl.k8s.io/release/stable.txt
@@ -50,4 +54,9 @@ kubectl version --client --output=yaml
 sudo usermod -aG docker ${USER}
 su - ${USER}
 minikube start
+source ~/.devops/bin/activate
 minikube status
+kubectl version --client --output=yaml
+
+# app.py # TO DO:  Log the output prediction value line 65
+LOG.info(f"Output Prediction Value: {prediction}")
