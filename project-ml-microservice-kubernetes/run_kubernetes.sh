@@ -8,7 +8,7 @@ dockerpath="aminu/flaskapp:v1.0.0"
 
 # Step 2
 # Run the Docker Hub container with kubernetes
-kubectl run flaskapp --image=aminu/flaskapp:v1.0.0 --port=80 --labels app=flaskapp
+kubectl run flaskapp --image=aminu/flaskapp:v1.0.0 --port=80
 
 # Step 3:
 # List kubernetes pods

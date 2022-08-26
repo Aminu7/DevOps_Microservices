@@ -4,7 +4,7 @@
 
 # Step 1:
 # Build image and add a descriptive tag
-docker build -t aminu/flaskapp:v1.0.0 .
+docker build -t aminu/flaskapp .
 
 # Step 2: 
 # List docker images
@@ -12,4 +12,4 @@ docker image ls
 
 # Step 3: 
 # Run flask app
-docker run -it -p 8000:80 aminu/flaskapp:v1.0.0
+docker run -it -p 8000:80 aminu/flaskapp
